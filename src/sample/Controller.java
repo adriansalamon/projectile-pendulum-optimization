@@ -152,7 +152,7 @@ public class Controller {
     */
     private double getSX(double angle, double l, double h) {
         //Gets the height at specific angle
-        double hr = l * (Math.cos(Math.toRadians(angle) - Math.cos(Math.toRadians(270)))) + h;
+        double hr = l*(Math.cos(Math.toRadians(angle) + Math.toRadians(180))) + h;
         //Force of gravity
         double g = 9.82;
         //Kinetic energy at specific angle
