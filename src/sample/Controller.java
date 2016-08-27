@@ -144,7 +144,7 @@ public class Controller {
     }
 
     /*Gets the length from the center of the pendulum to the floor
-    Angle is the angle from the resting position of the pendulum meaning if it is its resting posision (no movement) the angle would be 0 degrees. Max is 90 degrees.
+    Angle is the angle from the resting position of the pendulum meaning if it is its resting position (no movement) the angle would be 0 degrees. Max is 90 degrees.
 
     l is the length of the string of the pendulum
 
