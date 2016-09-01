@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,8 +33,12 @@ public class Controller {
     @FXML
     Label result;
 
+    double totalTries = 720;
+    double indexIncrement;
+
     //Initialization
     public void initialize() {
+        indexIncrement = 90/totalTries;
         xAxis.setLabel("Angle (°)");
         yAxis.setLabel("Length (m)");
 
@@ -44,7 +48,7 @@ public class Controller {
     //On button and enter click
     //Does calculations and displays them
     @FXML
-    public void onButton(ActionEvent actionEvent) {
+    private void onButton(ActionEvent actionEvent) {
         //Error handling on input text input
         if (lenght.getText().isEmpty() || height.getText().isEmpty() ||
                 isNotNumeric(lenght.getText()) || isNotNumeric(height.getText()) ||
@@ -77,8 +81,9 @@ public class Controller {
         //Set the name of series
         series.setName("h: " + heightValue + " l: " + lenghtValue);
 
-        //Loop through angles 0 to 90 and add results to array and series
-        for (int i = 0; i < 90; i++) {
+        //Loop through angles and add results to array and series
+        double indexValue = 90/totalTries;
+        for (double i = 0; i < 90; i+=indexIncrement) {
             resultArray.add(getSX(i, lenghtValue, heightValue));
             series.getData().add(new Data<>((double) i, getSX(i, lenghtValue, heightValue)));
         }
@@ -109,7 +114,7 @@ public class Controller {
     //Gets the optimal angle and its length from the results array
     private String getOptimalAngle(ArrayList<Double> list) {
         //Index and index value get returned
-        int index = 0;
+        double index = 0;
         double indexValue = list.get(0);
         //Loops through and changes value if one is larger
         for (int i = 0; i < list.size(); i++) {
@@ -119,10 +124,14 @@ public class Controller {
             }
         }
 
+
+
         //For rounding the output value
         int temp = (int) (indexValue * 1000);
         indexValue = temp;
         indexValue = indexValue / 1000;
+
+        index = index*indexIncrement;
 
         //Returning string
         return "Optimal angle: " + index + "°, optimum length: " + indexValue + " meters";
